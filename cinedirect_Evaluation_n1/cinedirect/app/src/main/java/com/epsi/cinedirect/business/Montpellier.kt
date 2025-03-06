@@ -1,32 +1,39 @@
 package com.epsi.cinedirect.business
 
+import com.epsi.cinedirect.models.CinemaHall
 import com.epsi.cinedirect.models.CinemaHallContract
 import com.epsi.cinedirect.models.Customer
 import com.epsi.cinedirect.models.Town
 
 object Montpellier: Town {
+    private val cinemaHallsList = mutableListOf<CinemaHallContract>()
+    private val customersList = mutableListOf<Customer>()
+
     override fun cinemaHalls(): List<CinemaHallContract> {
-        return listOf() // TODO : "Not yet implemented"
+        return cinemaHallsList.toList()
     }
 
     override fun createCinemaHall(name: String) {
-        //TODO("Not yet implemented")
+        if (!cinemaHallsList.any { it.name() == name }) {
+            cinemaHallsList.add(CinemaHall(name))
+        }
     }
 
     override fun deleteCinemaHall(name: String) {
-        //TODO("Not yet implemented")
+        cinemaHallsList.removeIf { it.name() == name }
     }
 
     override fun customers(): List<Customer> {
-        return listOf() //TODO("Not yet implemented")
-
+        return customersList.toList()
     }
 
     override fun createCustomer(name: String) {
-        //TODO("Not yet implemented")
+        if (!customersList.any { it.name == name }) {
+            customersList.add(Customer(name))
+        }
     }
 
     override fun deleteCustomer(name: String) {
-        //TODO("Not yet implemented")
+        customersList.removeIf { it.name == name }
     }
 }
